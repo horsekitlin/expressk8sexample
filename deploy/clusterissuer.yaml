@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+  # name: issuer-letsencrypt-staging
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: passon.com.tw@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-key
+      # name: issuer-letsencrypt-staging
+    solvers:
+    - http01:
+       ingress:
+         class: internal-nginx
+         podTemplate:
+            spec:
+              nodeSelector:
+                "kubernetes.io/os": linux

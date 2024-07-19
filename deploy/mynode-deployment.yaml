@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mynode-app
+  namespace: nodejs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mynode-app
+  template:
+    metadata:
+      labels:
+        app: mynode-app
+    spec:
+      containers:
+      - name: mynode-app
+        image: passon/mynode-app
+        # imagePullSecrets: IfNotPresent
+        ports:
+        - containerPort: 3000
+      # imagePullSecrets:
+      # - name: mycreds
