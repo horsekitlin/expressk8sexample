@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: kuard.tomas.website-issuer
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: kuard.tomas.website
+    solvers:
+    - http01:
+        ingress:
+          ingressClassName: nginx
+
+# https://cert-manager.io/docs/tutorials/acme/nginx-ingress/
